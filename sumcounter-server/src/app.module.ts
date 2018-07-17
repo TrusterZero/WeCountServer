@@ -1,11 +1,10 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { RiotService } from './riot.service';
+import { Module, HttpModule } from '@nestjs/common';
+import { AppController } from 'app.controller';
+import { PROVIDERS } from 'app-module/providers';
 
 @Module({
-  imports: [],
+  imports: [HttpModule],
   controllers: [AppController],
-  providers: [AppService, RiotService],
+  providers: [...PROVIDERS],
 })
 export class AppModule {}

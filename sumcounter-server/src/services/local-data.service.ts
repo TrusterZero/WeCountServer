@@ -1,4 +1,3 @@
-
 import * as fs from "fs";
 
 
@@ -8,8 +7,8 @@ export interface LocalData {
 }
 
 export abstract class LocalDataService<T extends LocalData>  {
-    assetPath = "assets/";
-    localData: T[] = [];
+    private assetPath = "assets/";
+    private localData: T[] = [];
 
     constructor(fileName: string) {
         this.localData = this.getLocalData(fileName);

@@ -18,14 +18,12 @@ export class Summoner {
         spell2: Spell;
         hasCDR = false;
     
-    constructor(parameters: SummonerParameters,
-                championDataService:ChampionDataService,
-                spellDataService: SpellDataService) {
+    constructor(parameters: SummonerParameters) {
 
         this.id = parameters.summonerId;
-        this.champion = new Champion(parameters.championId, championDataService);
-        this.spell1 = new Spell(parameters.spell1Id, spellDataService);
-        this.spell2 = new Spell(parameters.spell2Id, spellDataService);
+        this.champion = new Champion(parameters.championId);
+        this.spell1 = new Spell(parameters.spell1Id);
+        this.spell2 = new Spell(parameters.spell2Id);
         this.hasCDR = parameters.hasCDR;
     }
 }

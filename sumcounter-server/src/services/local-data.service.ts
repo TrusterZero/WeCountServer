@@ -2,7 +2,7 @@ import * as fs from "fs";
 
 
 export interface LocalData {
-    key: string;
+    key: number;
     name: string;
 }
 
@@ -19,8 +19,8 @@ export abstract class LocalDataService<T extends LocalData>  {
      * 
      * @param key 
      */
-    getItemByKey(key: string): T {
-        return this.localData.find((item: T) => item.key === key.toString());
+    getItemByKey(key: number): T {
+        return this.localData.find((item: T) => item.key.toString() === key.toString());
     }
 
     /**

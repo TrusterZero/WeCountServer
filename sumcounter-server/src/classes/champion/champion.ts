@@ -1,14 +1,14 @@
 import { ChampionDataService, ChampionData } from "services/champion-data.service";
 
-//const championDataService: ChampionDataService = new ChampionDataService()
+const championDataService: ChampionDataService = new ChampionDataService()
 
 export class Champion {
 
-    id: string;
+    id: number;
     name: string;
     image: string;
 
-    constructor(championId: string, championDataService: ChampionDataService) {
+    constructor(championId: number) {
         this.id = championId;
 
         let championData: ChampionData = championDataService.getItemByKey(this.id);

@@ -1,8 +1,18 @@
 import { LocalDataService, LocalData } from "./local-data.service";
-import { Injectable } from "../../node_modules/@nestjs/common";
+import { Injectable } from "@nestjs/common";
+
+interface SpellImage {
+    full: string;
+    sprite: string;
+    group: string;
+    x: number;
+    y: number;
+    w: number;
+    g: number;
+}
 
 export interface SpellData extends LocalData {
-    image: string;
+    image: SpellImage;
     cooldown: number
 }
 

@@ -47,7 +47,7 @@ export interface Perks {
 }
 
 export interface SummonerResponse {
-    id: string;
+    id: number;
     name: string;
     profileIconId: number;
     revisionDate: number;

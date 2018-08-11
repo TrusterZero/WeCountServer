@@ -1,7 +1,5 @@
 import { Champion } from "../champion/champion"
 import { Spell } from "../spell/spell"
-import { ChampionDataService } from "services/champion-data.service";
-import { SpellDataService } from "services/spell-data.service";
 
 export interface SummonerParameters {
     summonerId: number;
@@ -17,7 +15,7 @@ export class Summoner {
         spell1: Spell;
         spell2: Spell;
         hasCDR = false;
-    
+
     constructor(parameters: SummonerParameters) {
 
         this.id = parameters.summonerId;
@@ -25,9 +23,9 @@ export class Summoner {
         this.spell1 = new Spell(parameters.spell1Id);
         this.spell2 = new Spell(parameters.spell2Id);
         this.hasCDR = parameters.hasCDR;
-        if(this.hasCDR) {
-            this.spell1.cooldown *= 0.95
-            this.spell2.cooldown *= 0.95
+        if (this.hasCDR) {
+            this.spell1.cooldown *= 0.95;
+            this.spell2.cooldown *= 0.95;
         }
     }
 }

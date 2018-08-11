@@ -11,7 +11,7 @@ export class Champion {
     constructor(championId: number) {
         this.id = championId;
 
-        let championData: ChampionData = championDataService.getItemByKey(this.id);
+        const championData: ChampionData = championDataService.getItemByKey(this.id);
 
         if (championData) {
             this.name = championData.name;

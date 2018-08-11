@@ -5,7 +5,7 @@ export class Match {
     summoners: Summoner[];
 
 
-    constructor(id: number,summoners: Summoner[]) {
+    constructor(id: number, summoners: Summoner[]) {
         this.id = id;
         this.summoners = summoners;
     }

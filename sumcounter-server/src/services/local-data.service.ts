@@ -1,5 +1,4 @@
-import * as fs from "fs";
-
+import * as fs from 'fs';
 
 export interface LocalData {
     key: number;
@@ -7,17 +6,17 @@ export interface LocalData {
 }
 
 export abstract class LocalDataService<T extends LocalData>  {
-    private assetPath = "assets/";
+    private assetPath = 'assets/';
     private localData: T[] = [];
 
-    constructor(fileName: string) {
+    protected constructor(fileName: string) {
         this.localData = this.getLocalData(fileName);
     }
 
     /**
      * fetches an item from the local data source
-     * 
-     * @param key 
+     *
+     * @param key
      */
     getItemByKey(key: number): T {
         return this.localData.find((item: T) => item.key.toString() === key.toString());
@@ -25,8 +24,8 @@ export abstract class LocalDataService<T extends LocalData>  {
 
     /**
      * reads the passed JSON file containing local data
-     * 
-     * @param fileName 
+     *
+     * @param fileName
      */
     private getLocalData(fileName: string): T[] {
         const fileData: Buffer = fs.readFileSync(`${this.assetPath}${fileName}`);
@@ -35,7 +34,7 @@ export abstract class LocalDataService<T extends LocalData>  {
         try {
             parsedContent = JSON.parse(fileData.toString());
         } catch (err) {
-            console.warn("couldn't parse contents of", fileName);
+            console.warn('couldn\'t parse contents of', fileName);
         }
 
         return parsedContent;

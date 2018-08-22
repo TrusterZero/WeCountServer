@@ -32,7 +32,7 @@ export interface CurrentGameParticipant {
     spell1Id: number;
     spell2Id: number;
     teamId: number;
-    summonerId: number;    
+    summonerId: number;
 }
 
 export interface GameCustomizationObject {
@@ -53,3 +53,4 @@ export interface SummonerResponse {
     revisionDate: number;
     level: number;
 }
+

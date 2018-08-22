@@ -1,16 +1,17 @@
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { ApiService } from '../api/api.service';
+import { ApiService, isAxiosError } from '../api/api.service';
 import { HttpService } from '@nestjs/common';
 import { CooldownActivationData, CreationRequest, Payload, RequestError, RequestErrorCodes, SocketEvents } from './socket.interface';
 import { Match } from '../../classes/match/match';
 import { AxiosError } from '@nestjs/common/http/interfaces/axios.interfaces';
 import { Socket } from 'socket.io';
+import { RiotService } from '../riot.service';
 
 @WebSocketGateway()
 export class EventsGateway {
 
   @WebSocketServer() server;
-  apiService = new ApiService(new HttpService());
+  riotService = new RiotService();
 
   /**
    *
@@ -40,20 +41,21 @@ export class EventsGateway {
 
     const data = payload.data as CreationRequest;
 
-    this.apiService.getMatch(data.summonerId)
+    this.riotService.getMatch(data)
         .subscribe((match: Match) => {
 
           const roomId = match.id;
           client.join(`${roomId}`);
 
           this.server.to(client.id).emit(SocketEvents.matchCreated, match);
-        }, error => {
-
-            if (error.response) // misschien een betere  type check
+        }, (error) => {
+            if (isAxiosError(error))
             {
-              this.handleAxiosError(client , error as AxiosError);
+              this.handleAxiosError(client , error );
+              return;
             }
-            // beste manier om onverwachte errors te loggen
+
+            console.error('unhandled API Error in get match', error);
         });
   }
 
@@ -65,16 +67,18 @@ export class EventsGateway {
    * @param error
    */
   private handleAxiosError(client: Socket, error: AxiosError) {
-
+      console.log(error)
       switch (error.response.status) {
 
         case RequestErrorCodes.unauthorized:
-          this.server.to(client.id).emit(SocketEvents.requestError,
-                                        { status: RequestErrorCodes.unauthorized } as RequestError);
+          this.server.to(client.id)
+            .emit(SocketEvents.requestError,
+                  { status: RequestErrorCodes.unauthorized } as RequestError);
           break;
 
         case RequestErrorCodes.forbidden:
-          this.server.to(client.id).emit(SocketEvents.requestError,
+          this.server.to(client.id)
+              .emit(SocketEvents.requestError,
                                         { status: RequestErrorCodes.forbidden } as RequestError);
           break;
 

@@ -1,6 +1,8 @@
 import { Champion } from "../champion/champion"
 import { Spell } from "../spell/spell"
 
+const REDUCED_CDR_AMOUNT = 0.95;
+
 export interface SummonerParameters {
     summonerId: number;
     championId: number;
@@ -24,8 +26,8 @@ export class Summoner {
         this.spell2 = new Spell(parameters.spell2Id);
         this.hasCDR = parameters.hasCDR;
         if (this.hasCDR) {
-            this.spell1.cooldown *= 0.95;
-            this.spell2.cooldown *= 0.95;
+            this.spell1.cooldown *= REDUCED_CDR_AMOUNT;
+            this.spell2.cooldown *= REDUCED_CDR_AMOUNT;
         }
     }
 }

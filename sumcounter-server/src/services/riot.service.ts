@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AxiosResponse } from '@nestjs/common/http/interfaces/axios.interfaces';
 import { Summoner } from '../classes/summoner/summoner';
-import { RiotRequest } from '../classes/request-header/request-header';
+import { RiotRequest } from '../classes/riot-request/riot-request';
 import { CreationRequest} from './socket/socket.interface';
+import { Credentials } from '../classes/credentials';
 
-const RIOT_TOKEN = 'RGAPI-fcd59358-5682-489e-9348-3a35fe99ce24';
 const COSMIC_INSIGHT_ID = 8347;
 const URL_PARTIAL = {
   SUMMONER: 'summoner/v3/summoners/by-name/',
@@ -30,7 +30,7 @@ export class RiotService {
    * @param userName
    */
   getSummoner(region, userName: string): Observable<SummonerResponse> {
-    const summonerRequest: RiotRequest = new RiotRequest(region, RIOT_TOKEN, {
+    const summonerRequest: RiotRequest = new RiotRequest(region, Credentials.riotKey, {
       url: `${URL_PARTIAL.SUMMONER}${userName}`,
     });
 
@@ -50,7 +50,7 @@ export class RiotService {
    */
   getMatch(creationRequest: CreationRequest): Observable<Match> {
 
-    const matchRequest: RiotRequest = new RiotRequest(creationRequest.region, RIOT_TOKEN, {
+    const matchRequest: RiotRequest = new RiotRequest(creationRequest.region, Credentials.riotKey, {
       url: `${URL_PARTIAL.MATCH}${creationRequest.summonerId}`,
     });
 
@@ -60,7 +60,7 @@ export class RiotService {
 
           const teamId = response.data.participants // TODO: check waarom 2 number parses wel werken
             .find((participant) => Number(participant.summonerId) === Number(creationRequest.summonerId)).teamId;
-          const summoners: Summoner[] = this.convertParticipants(teamId, response.data.participants)
+          const summoners: Summoner[] = this.convertParticipants(teamId, response.data.participants);
 
           return new Match(response.data.gameId, summoners);
         }),

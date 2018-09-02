@@ -20,8 +20,7 @@ const URL_PARTIAL = {
 export class RiotService {
   private readonly apiService = new ApiService(new HttpService());
 
-  constructor() {
-  }
+  constructor() { }
 
   /**
    *
@@ -79,7 +78,7 @@ export class RiotService {
     const summoners: Summoner[] = [];
 
     participants.forEach((participant: CurrentGameParticipant) => {
-      if (participant.teamId === teamId) {
+      if (participant.teamId !== teamId) {
         summoners.push(
           new Summoner({
               summonerId: participant.summonerId,

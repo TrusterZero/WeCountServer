@@ -33,7 +33,6 @@ export class RiotRequest extends AxiosRequest {
     if (!regionEndpoint) {
       return;
     }
-
     this.baseURL = `https://${regionEndpoint}.api.riotgames.com/lol/`;
     this.headers = this.creatRiotReader(riotToken);
   }

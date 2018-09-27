@@ -1,25 +1,33 @@
-import { HttpService } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { AxiosResponse } from 'axios';
-import { AxiosError, AxiosRequestConfig } from '@nestjs/common/http/interfaces/axios.interfaces';
+import {HttpService} from '@nestjs/common';
+import {Observable, Subject} from 'rxjs';
+import {AxiosResponse} from 'axios';
+import {AxiosError, AxiosRequestConfig} from '@nestjs/common/http/interfaces/axios.interfaces';
+import {catchError} from "rxjs/operators";
+import {MatchResponse} from "./api.interface";
 
 export function isAxiosError(error: AxiosError): error is AxiosError {
 
-  return typeof (error as AxiosError).config !== 'undefined';
+    return typeof (error as AxiosError).config !== 'undefined';
 }
 
 export class ApiService {
 
-  constructor(private httpService: HttpService) {
-  }
+    constructor(private httpService: HttpService) {
+    }
 
-  /**
-   *
-   * Fires a GET request to given endpoint
-   *
-   * @param endpoint
-   */
-  get<T>(requestConfig: AxiosRequestConfig): Observable<AxiosResponse<T>> {
-    return this.httpService.request<T>(requestConfig);
-  }
+    /**
+     *
+     * Fires a GET request to given endpoint
+     *
+     * @param endpoint
+     */
+    get<T>(requestConfig: AxiosRequestConfig): Observable<AxiosResponse<T>> {
+        return this.httpService.request<T>(requestConfig);
+    }
+
+    handleError(err: any, caught: Observable<AxiosResponse>) {
+        const loadingError$ = new Subject<boolean>();
+        console.log(err)
+        return loadingError$;
+    }
 }

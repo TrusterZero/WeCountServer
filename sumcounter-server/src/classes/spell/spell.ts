@@ -9,9 +9,9 @@ export class Spell {
     image: string;
     cooldown: number;
 
-  constructor(spellId: number) {
-    this.id = spellId;
-    const spellData: SpellData = spellDataService.getItemByKey(this.id);
+  constructor(summonerId: number, spellId: number) {
+    this.id = Number(`${summonerId}${spellId}`);
+    const spellData: SpellData = spellDataService.getItemByKey(spellId);
 
     if (spellData) {
 

@@ -22,8 +22,8 @@ export class Summoner {
 
         this.id = parameters.summonerId;
         this.champion = new Champion(parameters.championId);
-        this.spell1 = new Spell(parameters.spell1Id);
-        this.spell2 = new Spell(parameters.spell2Id);
+        this.spell1 = new Spell(this.id, parameters.spell1Id);
+        this.spell2 = new Spell(this.id, parameters.spell2Id);
         this.hasCDR = parameters.hasCDR;
         if (this.hasCDR) {
             this.spell1.cooldown *= REDUCED_CDR_AMOUNT;

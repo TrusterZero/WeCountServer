@@ -30,6 +30,7 @@ export class RiotRequest extends AxiosRequest {
     super(config);
 
     const regionEndpoint: RegionalEndpoint = RegionalEndpoint[region];
+    console.log(region);
     if (!regionEndpoint) {
       return;
     }

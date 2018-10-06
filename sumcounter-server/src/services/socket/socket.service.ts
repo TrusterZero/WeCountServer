@@ -7,13 +7,14 @@ import {
     Payload,
     RequestError,
     RequestErrorCodes,
-    SocketEvents, Source
+    SocketEvent, Source
 } from './socket.interface';
 import {Match} from '../../classes/match/match';
 import {AxiosError} from '@nestjs/common/http/interfaces/axios.interfaces';
 import {Socket} from 'socket.io';
 import {RiotService} from '../riot.service';
 import {SummonerResponse} from '../api/api.interface';
+import {catchError} from "rxjs/operators";
 
 @WebSocketGateway()
 export class EventsGateway {
@@ -29,11 +30,10 @@ export class EventsGateway {
      * @param client: The socket of user who emitted 'startCooldown'
      * @param data: info about the spell that should be on cooldown
      */
-    @SubscribeMessage(SocketEvents.startCooldown)
+    @SubscribeMessage(SocketEvent.startCooldown)
     private sumUsed(client: Socket, payload: Payload) {
-        console.log(payload)
         this.server.to(payload.roomId)
-            .emit(SocketEvents.sumUsed, payload.data as CooldownActivationData);
+            .emit(SocketEvent.sumUsed, payload.data as CooldownActivationData);
     }
 
     /**
@@ -44,13 +44,12 @@ export class EventsGateway {
      * @param client: The socket of user who emitted 'createMatch'
      * @param data: an Object containing the summonerId of the user
      */
-    @SubscribeMessage(SocketEvents.createMatch)
+    @SubscribeMessage(SocketEvent.createMatch)
     private createMatch(client: Socket, payload: Payload) {
-        if (this.validatePayload(payload)) {
-            client.emit(SocketEvents.requestError, {message: 'error in payload!'});
+        if (!payload.data){
+            client.emit(SocketEvent.requestError, { status: RequestErrorCodes.unhandled})
             return;
         }
-
         this.checkSource(payload).then((checkedPayload) => {
             const data = checkedPayload.data as CreationRequest;
             this.riotService.getMatch(data)
@@ -69,30 +68,30 @@ export class EventsGateway {
     private handleAxiosError(client: Socket, error: AxiosError) {
 
         if (!error.response) {
-            this.server.to(client.id).emit(SocketEvents.requestError, {status: RequestErrorCodes.unhandled});
+            this.server.to(client.id).emit(SocketEvent.requestError, {status: RequestErrorCodes.unhandled});
             return false;
         }
         switch (error.response.status) {
 
             case RequestErrorCodes.unauthorized:
                 this.server.to(client.id)
-                    .emit(SocketEvents.requestError,
+                    .emit(SocketEvent.requestError,
                         {status: RequestErrorCodes.unauthorized} as RequestError);
                 break;
 
             case RequestErrorCodes.forbidden:
                 this.server.to(client.id)
-                    .emit(SocketEvents.requestError,
+                    .emit(SocketEvent.requestError,
                         {status: RequestErrorCodes.forbidden} as RequestError);
                 break;
 
             case RequestErrorCodes.notFound:
-                this.server.to(client.id).emit(SocketEvents.requestError,
+                this.server.to(client.id).emit(SocketEvent.requestError,
                     {status: RequestErrorCodes.notFound} as RequestError);
                 break;
 
             default:
-                this.server.to(client.id).emit(SocketEvents.requestError,
+                this.server.to(client.id).emit(SocketEvent.requestError,
                     {status: RequestErrorCodes.unhandled} as RequestError);
         }
     }
@@ -100,20 +99,18 @@ export class EventsGateway {
     placeSummoner(match: Match, client: Socket) {
         const roomId = match.id;
         client.join(`${roomId}`);
-        this.server.to(client.id).emit(SocketEvents.matchCreated, match);
-    }
-
-    validatePayload(payload: Payload) {
-        return payload.data === null;
+        this.server.to(client.id).emit(SocketEvent.matchCreated, match);
     }
 
     checkSource(payload: Payload): Promise<Payload> {
+        console.log(payload)
         return new Promise((resolve) => {
             if (payload.source !== Source.mobile) {
                 resolve(payload);
             }
             this.riotService.getSummoner(payload.data.region, payload.data.summonerName)
                 .subscribe((summonerResponse: SummonerResponse) => {
+                    console.log(summonerResponse)
                     payload.data.summonerId = summonerResponse.id;
                     resolve(payload);
                 });

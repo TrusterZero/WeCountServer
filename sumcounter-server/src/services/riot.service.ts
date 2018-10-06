@@ -35,15 +35,13 @@ export class RiotService {
             url: `${URL_PARTIAL.SUMMONER}${userName}`,
         });
 
-        const loadingError$ = new Subject<boolean>();
         return this.apiService.get<SummonerResponse>(summonerRequest)
             .pipe(catchError((err: any, caught) => this.apiService.handleError(err, caught)),
-        map((response: AxiosResponse<SummonerResponse>) => {
-            console.log(response.data)
-            return response.data;
-        }),
-    )
-        ;
+                map((response: AxiosResponse<SummonerResponse>) => {
+                    return response.data;
+                }),
+            )
+            ;
     }
 
     /**
@@ -60,11 +58,10 @@ export class RiotService {
         return this.apiService.get<MatchResponse>(matchRequest)
             .pipe(catchError((err: any, caught) => this.apiService.handleError(err, caught)),
                 map((response: AxiosResponse<MatchResponse>) => {
-                        console.log(response.data.participants)
                         const teamId = response.data.participants // TODO: check waarom 2 number parses wel werken
                             .find((participant) => Number(participant.summonerId) === Number(creationRequest.summonerId)).teamId;
                         const summoners: Summoner[] = this.convertParticipants(teamId, response.data.participants);
-                        console.log(summoners);
+
                         return new Match(response.data.gameId, summoners);
                     },
                 ));
@@ -94,11 +91,8 @@ export class RiotService {
                             hasCDR: this.hasCDR(participant),
                         },
                     ));
-                console.log('hoi');
             }
         });
-        console.log('got here')
-        console.log(summoners)
         return summoners;
     }
 

@@ -2,8 +2,6 @@ import {HttpService} from '@nestjs/common';
 import {Observable, Subject} from 'rxjs';
 import {AxiosResponse} from 'axios';
 import {AxiosError, AxiosRequestConfig} from '@nestjs/common/http/interfaces/axios.interfaces';
-import {catchError} from "rxjs/operators";
-import {MatchResponse} from "./api.interface";
 
 export function isAxiosError(error: AxiosError): error is AxiosError {
 

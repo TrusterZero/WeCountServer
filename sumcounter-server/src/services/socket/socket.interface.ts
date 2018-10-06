@@ -1,4 +1,4 @@
-export enum SocketEvents {
+export enum SocketEvent {
     startCooldown = 'startCooldown',
     createMatch = 'createMatch',
     matchCreated = 'matchCreated',
@@ -7,7 +7,7 @@ export enum SocketEvents {
 }
 
 export enum Source {
-    pc =  0,
+    pc = 0,
     mobile = 1
 }
 
@@ -15,7 +15,8 @@ export enum RequestErrorCodes {
     notFound = 404,
     forbidden = 403,
     unauthorized = 401,
-    unhandled = 0000
+    unhandled = 0,
+    noSummoners= 1
 }
 
 export interface RequestError {

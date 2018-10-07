@@ -2,7 +2,7 @@ import {Injectable, HttpService} from '@nestjs/common';
 import {ApiService} from './api/api.service';
 import {Match} from 'classes/match/match';
 import {CurrentGameParticipant, MatchResponse, SummonerResponse} from './api/api.interface';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {AxiosResponse} from '@nestjs/common/http/interfaces/axios.interfaces';
 import {Summoner} from '../classes/summoner/summoner';
@@ -36,12 +36,11 @@ export class RiotService {
         });
 
         return this.apiService.get<SummonerResponse>(summonerRequest)
-            .pipe(catchError((err: any, caught) => this.apiService.handleError(err, caught)),
+            .pipe(catchError((err: any) => throwError(err)),
                 map((response: AxiosResponse<SummonerResponse>) => {
                     return response.data;
                 }),
-            )
-            ;
+            );
     }
 
     /**
@@ -56,13 +55,14 @@ export class RiotService {
         });
 
         return this.apiService.get<MatchResponse>(matchRequest)
-            .pipe(catchError((err: any, caught) => this.apiService.handleError(err, caught)),
+            .pipe(catchError((err: any) => throwError(err)),
                 map((response: AxiosResponse<MatchResponse>) => {
+                    console.log(response.data);
                         const teamId = response.data.participants // TODO: check waarom 2 number parses wel werken
                             .find((participant) => Number(participant.summonerId) === Number(creationRequest.summonerId)).teamId;
                         const summoners: Summoner[] = this.convertParticipants(teamId, response.data.participants);
 
-                        return new Match(response.data.gameId, summoners);
+                        return new Match(response.data.gameId, response.data.gameMode, summoners);
                     },
                 ));
     }
@@ -79,7 +79,7 @@ export class RiotService {
         const summoners: Summoner[] = [];
 
         participants.forEach((participant: CurrentGameParticipant) => {
-            if (participant.teamId === teamId) {
+            if (participant.teamId !== teamId) {
 
 
                 summoners.push(

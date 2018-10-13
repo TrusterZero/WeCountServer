@@ -72,7 +72,6 @@ export class SocketErrorHandler {
     }
 
     matchNotFoundError(client: Socket, error: AxiosError) {
-        console.log(error)
         error.response.status === ErrorCode.notFound ?
             this.notify(client, {
                 status: ErrorCode.matchNotFound,

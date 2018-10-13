@@ -53,4 +53,3 @@ export interface SummonerResponse {
     revisionDate: number;
     level: number;
 }
-

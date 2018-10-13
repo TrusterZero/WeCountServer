@@ -19,10 +19,8 @@ const URL_PARTIAL = {
 
 @Injectable()
 export class RiotService {
-    private readonly apiService = new ApiService(new HttpService());
 
-    constructor() {
-    }
+    constructor(private apiService: ApiService) { }
 
     /**
      *
@@ -43,6 +41,7 @@ export class RiotService {
             );
     }
 
+
     /**
      *
      * Gets the all the information about a match from the Riot API and converts the data to a Match Object
@@ -57,11 +56,9 @@ export class RiotService {
         return this.apiService.get<MatchResponse>(matchRequest)
             .pipe(catchError((err: any) => throwError(err)),
                 map((response: AxiosResponse<MatchResponse>) => {
-                    console.log(response.data);
                         const teamId = response.data.participants // TODO: check waarom 2 number parses wel werken
                             .find((participant) => Number(participant.summonerId) === Number(creationRequest.summonerId)).teamId;
                         const summoners: Summoner[] = this.convertParticipants(teamId, response.data.participants);
-
                         return new Match(response.data.gameId, response.data.gameMode, summoners);
                     },
                 ));
@@ -80,7 +77,6 @@ export class RiotService {
 
         participants.forEach((participant: CurrentGameParticipant) => {
             if (participant.teamId !== teamId) {
-
 
                 summoners.push(
                     new Summoner({
@@ -109,3 +105,4 @@ export class RiotService {
     }
 
 }
+

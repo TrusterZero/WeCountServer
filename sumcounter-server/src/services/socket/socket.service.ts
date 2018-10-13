@@ -19,7 +19,8 @@ export class EventsGateway implements OnGatewayInit{
 
     @WebSocketServer() server;
     errorHandler: SocketErrorHandler;
-    riotService = new RiotService();
+
+    constructor(private riotService: RiotService) { }
 
     /**
      *
@@ -41,7 +42,7 @@ export class EventsGateway implements OnGatewayInit{
      * Places the user in the created room and sends the user the requested Match
      *
      * @param client: The socket of user who emitted 'createMatch'
-     * @param data: an Object containing the summonerId of the user
+     * @param payload
      */
     @SubscribeMessage(SocketEvent.createMatch)
     private createMatch(client: Socket, payload: Payload) {
@@ -57,7 +58,12 @@ export class EventsGateway implements OnGatewayInit{
         });
     }
 
-    placeSummoner(match: Match, client: Socket) {
+    /**
+     *
+     * @param match
+     * @param client
+     */
+    private placeSummoner(match: Match, client: Socket) {
         if (match.summoners.length === 0){
             this.errorHandler.noSummoners(client);
             return;
@@ -67,7 +73,7 @@ export class EventsGateway implements OnGatewayInit{
         this.server.to(client.id).emit(SocketEvent.matchCreated, match);
     }
 
-    checkSource(payload: Payload, client: Socket): Promise<Payload> {
+    private checkSource(payload: Payload, client: Socket): Promise<Payload> {
         return new Promise((resolve) => {
             if (payload.source !== Source.mobile) {
                 resolve(payload);
@@ -77,7 +83,6 @@ export class EventsGateway implements OnGatewayInit{
                     payload.data.summonerId = summonerResponse.id;
                     resolve(payload);
                 }, (error) => this.errorHandler.summonerNotFoundError(client, error));
-
         });
     }
 

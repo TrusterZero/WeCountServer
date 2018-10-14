@@ -1,4 +1,4 @@
-import { SpellDataService, SpellData } from "services/spell-data.service";
+import { SpellDataService, SpellData } from '../../services/spell-data.service';
 
 const spellDataService: SpellDataService = new SpellDataService()
 

@@ -5,9 +5,9 @@
  * @param client = client data was requested for
  * @param error
  */
-import {Server, Socket} from "socket.io";
-import {AxiosError} from "@nestjs/common/http/interfaces/axios.interfaces";
-import {ErrorCode, RequestError, RequestErrorMessage, SocketEvent} from "./socket.interface";
+import {Server, Socket} from 'socket.io';
+import {AxiosError} from '@nestjs/common/http/interfaces/axios.interfaces';
+import {ErrorCode, RequestError, RequestErrorMessage, SocketEvent} from './socket.interface';
 
 export class SocketErrorHandler {
 
@@ -72,6 +72,9 @@ export class SocketErrorHandler {
     }
 
     matchNotFoundError(client: Socket, error: AxiosError) {
+        if (!error.response) {
+            this.handle(client, error);
+        }
         error.response.status === ErrorCode.notFound ?
             this.notify(client, {
                 status: ErrorCode.matchNotFound,
@@ -81,7 +84,7 @@ export class SocketErrorHandler {
     }
 
     invalidData(client: Socket) {
-        this.notify(client, {status: ErrorCode.unhandled, message: RequestErrorMessage.invalidData} )
+        this.notify(client, {status: ErrorCode.unhandled, message: RequestErrorMessage.invalidData} );
     }
 
     wrongGameModeError(client: Socket) {

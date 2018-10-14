@@ -1,10 +1,8 @@
 import {OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer} from '@nestjs/websockets';
-import {isAxiosError} from '../api/api.service';
 import {
     CooldownActivationData,
     CreationRequest,
     Payload,
-    ErrorCode,
     SocketEvent,
     Source,
 } from './socket.interface';

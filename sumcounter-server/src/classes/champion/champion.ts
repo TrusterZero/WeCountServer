@@ -1,4 +1,4 @@
-import { ChampionDataService, ChampionData } from "services/champion-data.service";
+import { ChampionDataService, ChampionData } from '../../services/champion-data.service';
 
 const championDataService: ChampionDataService = new ChampionDataService()
 

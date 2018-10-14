@@ -1,15 +1,15 @@
 import {Injectable, HttpService} from '@nestjs/common';
 import {ApiService} from './api/api.service';
-import {Match} from 'classes/match/match';
+import {Match} from '../classes/match/match';
 import {CurrentGameParticipant, MatchResponse, SummonerResponse} from './api/api.interface';
-import {Observable, Subject, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {AxiosResponse} from '@nestjs/common/http/interfaces/axios.interfaces';
 import {Summoner} from '../classes/summoner/summoner';
 import {RiotRequest} from '../classes/riot-request/riot-request';
 import {CreationRequest} from './socket/socket.interface';
 import {Credentials} from '../classes/credentials';
-import {error} from "util";
+
 
 const COSMIC_INSIGHT_ID = 8347;
 const URL_PARTIAL = {

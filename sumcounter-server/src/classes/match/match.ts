@@ -1,4 +1,4 @@
-import { Summoner } from "../summoner/summoner";
+import { Summoner } from '../summoner/summoner';
 
 export class Match {
     id: number;

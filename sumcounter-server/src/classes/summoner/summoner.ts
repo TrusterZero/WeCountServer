@@ -1,5 +1,5 @@
-import { Champion } from "../champion/champion"
-import { Spell } from "../spell/spell"
+import { Champion } from '../champion/champion'
+import { Spell } from '../spell/spell'
 
 const REDUCED_CDR_AMOUNT = 0.95;
 

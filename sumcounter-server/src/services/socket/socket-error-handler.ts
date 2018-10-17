@@ -59,6 +59,10 @@ export class SocketErrorHandler {
     }
 
     summonerNotFoundError(client: Socket, error: AxiosError) {
+        if (!error.response) {
+            console.log(error)
+            this.handle(client, error);
+        }
         error.response.status === ErrorCode.notFound ?
             this.notify(client, {
                 status: ErrorCode.summonerNotfound,
@@ -73,6 +77,7 @@ export class SocketErrorHandler {
 
     matchNotFoundError(client: Socket, error: AxiosError) {
         if (!error.response) {
+            console.log(error)
             this.handle(client, error);
         }
         error.response.status === ErrorCode.notFound ?

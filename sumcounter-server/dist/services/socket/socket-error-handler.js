@@ -37,6 +37,10 @@ class SocketErrorHandler {
         }
     }
     summonerNotFoundError(client, error) {
+        if (!error.response) {
+            console.log(error);
+            this.handle(client, error);
+        }
         error.response.status === socket_interface_1.ErrorCode.notFound ?
             this.notify(client, {
                 status: socket_interface_1.ErrorCode.summonerNotfound,
@@ -49,6 +53,7 @@ class SocketErrorHandler {
     }
     matchNotFoundError(client, error) {
         if (!error.response) {
+            console.log(error);
             this.handle(client, error);
         }
         error.response.status === socket_interface_1.ErrorCode.notFound ?

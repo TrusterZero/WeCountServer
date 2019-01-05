@@ -17,6 +17,7 @@ class LocalDataService {
             parsedContent = JSON.parse(fileData.toString());
         }
         catch (err) {
+            console.log(err);
             console.warn('couldn\'t parse contents of', fileName);
         }
         return parsedContent;

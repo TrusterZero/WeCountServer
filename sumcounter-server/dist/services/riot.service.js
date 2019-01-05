@@ -41,24 +41,28 @@ let RiotService = class RiotService {
         });
         return this.apiService.get(matchRequest)
             .pipe(operators_1.catchError((err) => rxjs_1.throwError(err)), operators_1.map((response) => {
-            const teamId = response.data.participants
-                .find((participant) => Number(participant.summonerId) === Number(creationRequest.summonerId)).teamId;
-            const summoners = this.convertParticipants(teamId, response.data.participants);
-            return new match_1.Match(response.data.gameId, response.data.gameMode, summoners);
+            const requesterId = creationRequest.summonerId;
+            const { participants, gameId, gameMode } = response.data;
+            const teamId = participants
+                .find((participant) => Number(participant.summonerId) === Number(requesterId)).teamId;
+            const summoners = this.parseParticipants(requesterId, teamId, participants);
+            return new match_1.Match(gameId, gameMode, summoners);
         }));
     }
-    convertParticipants(teamId, participants) {
+    parseParticipants(requesterId, teamId, participants) {
         const summoners = [];
         participants.forEach((participant) => {
-            if (participant.teamId !== teamId) {
-                summoners.push(new summoner_1.Summoner({
-                    summonerId: participant.summonerId,
-                    championId: participant.championId,
-                    spell1Id: participant.spell1Id,
-                    spell2Id: participant.spell2Id,
-                    hasCDR: this.hasCDR(participant),
-                }));
-            }
+            const { summonerId, summonerName, championId, teamId, spell1Id, spell2Id } = participant;
+            summoners.push(new summoner_1.Summoner({
+                summonerId,
+                championId,
+                summonerName,
+                teamId,
+                spell1Id,
+                spell2Id,
+                hasCDR: this.hasCDR(participant),
+                isRequester: Number(summonerId) === Number(requesterId)
+            }));
         });
         return summoners;
     }

@@ -30,12 +30,14 @@ export class RiotService {
      */
     getSummoner(region, userName: string): Observable<SummonerResponse> {
         const summonerRequest: RiotRequest = new RiotRequest(region, Credentials.riotKey, {
-            url: `${URL_PARTIAL.SUMMONER}${userName}`,
+            url: `${URL_PARTIAL.SUMMONER}${encodeURI(userName)}`,
         });
+
 
         return this.apiService.get<SummonerResponse>(summonerRequest)
             .pipe(catchError((err: any) => throwError(err)),
                 map((response: AxiosResponse<SummonerResponse>) => {
+                    console.log(response)
                     return response.data;
                 }),
             );
@@ -56,10 +58,14 @@ export class RiotService {
         return this.apiService.get<MatchResponse>(matchRequest)
             .pipe(catchError((err: any) => throwError(err)),
                 map((response: AxiosResponse<MatchResponse>) => {
-                        const teamId = response.data.participants // TODO: check waarom 2 number parses wel werken
-                            .find((participant) => Number(participant.summonerId) === Number(creationRequest.summonerId)).teamId;
-                        const summoners: Summoner[] = this.convertParticipants(teamId, response.data.participants);
-                        return new Match(response.data.gameId, response.data.gameMode, summoners);
+                    const requesterId = creationRequest.summonerId;
+                    const {participants, gameId, gameMode} = response.data;
+                    console.log(response.data);
+                        const teamId = participants // TODO: check waarom 2 number parses wel werken
+                            .find((participant: CurrentGameParticipant) => Number(participant.summonerId) === Number(requesterId)).teamId;
+
+                        const summoners: Summoner[] = this.parseParticipants(requesterId,teamId, participants);
+                        return new Match(gameId, gameMode, summoners);
                     },
                 ));
     }
@@ -70,24 +76,25 @@ export class RiotService {
      *
      * @param teamId
      * @param participants
+     *
      */
-    private convertParticipants(teamId: number, participants: CurrentGameParticipant[]): Summoner[] {
+    private parseParticipants(requesterId: number, teamId: number, participants: CurrentGameParticipant[]): Summoner[] {
 
         const summoners: Summoner[] = [];
-
         participants.forEach((participant: CurrentGameParticipant) => {
-            if (participant.teamId !== teamId) {
-
+                const {summonerId, summonerName, championId, teamId, spell1Id, spell2Id} = participant;
                 summoners.push(
                     new Summoner({
-                            summonerId: participant.summonerId,
-                            championId: participant.championId,
-                            spell1Id: participant.spell1Id,
-                            spell2Id: participant.spell2Id,
+                            summonerId,
+                            championId,
+                            summonerName,
+                            teamId,
+                            spell1Id,
+                            spell2Id,
                             hasCDR: this.hasCDR(participant),
+                            isRequester: Number(summonerId) === Number(requesterId)
                         },
                     ));
-            }
         });
         return summoners;
     }
@@ -100,7 +107,6 @@ export class RiotService {
      * @param user
      */
     private hasCDR(user): boolean {
-
         return user.perks.perkIds.includes(COSMIC_INSIGHT_ID);
     }
 

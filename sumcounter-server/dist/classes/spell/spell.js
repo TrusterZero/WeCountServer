@@ -9,7 +9,7 @@ class Spell {
         if (spellData) {
             this.name = spellData.name;
             this.image = spellData.image.full;
-            this.cooldown = spellData.cooldown;
+            this.cooldown = [...spellData.cooldown];
         }
     }
 }

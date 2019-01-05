@@ -13,7 +13,7 @@ interface SpellImage {
 
 export interface SpellData extends LocalData {
     image: SpellImage;
-    cooldown: number;
+    cooldown: number[];
 }
 
 @Injectable()

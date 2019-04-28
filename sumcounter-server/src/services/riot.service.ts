@@ -3,18 +3,19 @@ import {ApiService} from './api/api.service';
 import {Match} from '../classes/match/match';
 import {CurrentGameParticipant, MatchResponse, SummonerResponse} from './api/api.interface';
 import {Observable, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, subscribeOn} from 'rxjs/operators';
 import {AxiosResponse} from '@nestjs/common/http/interfaces/axios.interfaces';
 import {Summoner} from '../classes/summoner/summoner';
 import {RiotRequest} from '../classes/riot-request/riot-request';
 import {CreationRequest} from './socket/socket.interface';
 import {Credentials} from '../classes/credentials';
+import {AxiosRequest} from "../classes/axios-request/axios-request";
 
 
 const COSMIC_INSIGHT_ID = 8347;
 const URL_PARTIAL = {
-    SUMMONER: 'summoner/v3/summoners/by-name/',
-    MATCH: 'spectator/v3/active-games/by-summoner/',
+    SUMMONER: 'summoner/v4/summoners/by-name/',
+    MATCH: 'spectator/v4/active-games/by-summoner/',
 };
 
 @Injectable()
@@ -37,12 +38,29 @@ export class RiotService {
         return this.apiService.get<SummonerResponse>(summonerRequest)
             .pipe(catchError((err: any) => throwError(err)),
                 map((response: AxiosResponse<SummonerResponse>) => {
-                    console.log(response)
                     return response.data;
                 }),
             );
     }
 
+    private getApiVersions(): Observable<AxiosResponse> {
+
+        const versionRequest = new AxiosRequest({
+            url: 'https://ddragon.leagueoflegends.com/api/versions.json'
+        });
+
+        return this.apiService.get(versionRequest)
+    }
+
+    public getLatestApiVersion(): Promise<string> {
+        return new Promise(((resolve, reject) =>  {
+            this.getApiVersions().subscribe((response :AxiosResponse) => {
+                const versions: string[] = response.data;
+                const latestVersion: string = versions[0];
+                resolve(latestVersion);
+            })
+        }));
+    }
 
     /**
      *
@@ -62,7 +80,7 @@ export class RiotService {
                     const {participants, gameId, gameMode} = response.data;
                     console.log(response.data);
                         const teamId = participants // TODO: check waarom 2 number parses wel werken
-                            .find((participant: CurrentGameParticipant) => Number(participant.summonerId) === Number(requesterId)).teamId;
+                            .find((participant: CurrentGameParticipant) => participant.summonerId === requesterId).teamId;
 
                         const summoners: Summoner[] = this.parseParticipants(requesterId,teamId, participants);
                         return new Match(gameId, gameMode, summoners);
@@ -78,7 +96,7 @@ export class RiotService {
      * @param participants
      *
      */
-    private parseParticipants(requesterId: number, teamId: number, participants: CurrentGameParticipant[]): Summoner[] {
+    private parseParticipants(requesterId: string, teamId: number, participants: CurrentGameParticipant[]): Summoner[] {
 
         const summoners: Summoner[] = [];
         participants.forEach((participant: CurrentGameParticipant) => {
@@ -92,7 +110,7 @@ export class RiotService {
                             spell1Id,
                             spell2Id,
                             hasCDR: this.hasCDR(participant),
-                            isRequester: Number(summonerId) === Number(requesterId)
+                            isRequester: summonerId === requesterId
                         },
                     ));
         });

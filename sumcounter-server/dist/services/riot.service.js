@@ -19,8 +19,8 @@ const riot_request_1 = require("../classes/riot-request/riot-request");
 const credentials_1 = require("../classes/credentials");
 const COSMIC_INSIGHT_ID = 8347;
 const URL_PARTIAL = {
-    SUMMONER: 'summoner/v3/summoners/by-name/',
-    MATCH: 'spectator/v3/active-games/by-summoner/',
+    SUMMONER: 'summoner/v4/summoners/by-name/',
+    MATCH: 'spectator/v4/active-games/by-summoner/',
 };
 let RiotService = class RiotService {
     constructor(apiService) {
@@ -28,10 +28,11 @@ let RiotService = class RiotService {
     }
     getSummoner(region, userName) {
         const summonerRequest = new riot_request_1.RiotRequest(region, credentials_1.Credentials.riotKey, {
-            url: `${URL_PARTIAL.SUMMONER}${userName}`,
+            url: `${URL_PARTIAL.SUMMONER}${encodeURI(userName)}`,
         });
         return this.apiService.get(summonerRequest)
             .pipe(operators_1.catchError((err) => rxjs_1.throwError(err)), operators_1.map((response) => {
+            console.log(response);
             return response.data;
         }));
     }
@@ -43,8 +44,9 @@ let RiotService = class RiotService {
             .pipe(operators_1.catchError((err) => rxjs_1.throwError(err)), operators_1.map((response) => {
             const requesterId = creationRequest.summonerId;
             const { participants, gameId, gameMode } = response.data;
+            console.log(response.data);
             const teamId = participants
-                .find((participant) => Number(participant.summonerId) === Number(requesterId)).teamId;
+                .find((participant) => participant.summonerId === requesterId).teamId;
             const summoners = this.parseParticipants(requesterId, teamId, participants);
             return new match_1.Match(gameId, gameMode, summoners);
         }));
@@ -61,7 +63,7 @@ let RiotService = class RiotService {
                 spell1Id,
                 spell2Id,
                 hasCDR: this.hasCDR(participant),
-                isRequester: Number(summonerId) === Number(requesterId)
+                isRequester: summonerId === requesterId
             }));
         });
         return summoners;

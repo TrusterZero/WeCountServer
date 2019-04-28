@@ -1,7 +1,9 @@
 import { LocalDataService, LocalData } from './local-data.service';
 import { Injectable } from '@nestjs/common';
+import {RiotService} from "./riot.service";
 
 interface SpellImage {
+
     full: string;
     sprite: string;
     group: string;
@@ -18,8 +20,8 @@ export interface SpellData extends LocalData {
 
 @Injectable()
 export class SpellDataService extends LocalDataService<SpellData> {
-
-    constructor() {
-        super('spells.json');
+     constructor(private riotService: RiotService) {
+         super('spells.json');
+         this.setVersion(riotService);
     }
 }

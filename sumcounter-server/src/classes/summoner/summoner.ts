@@ -5,7 +5,7 @@ import {Socket} from "socket.io";
 const REDUCED_CDR_AMOUNT = 0.95;
 
 export interface SummonerParameters {
-    summonerId: number;
+    summonerId: string;
     summonerName:string;
     championId: number;
     teamId: number;
@@ -16,7 +16,7 @@ export interface SummonerParameters {
 }
 
 export class Summoner {
-        id: number;
+        id: string;
         name: string;
         champion: Champion;
         teamId: number;

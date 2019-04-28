@@ -27,7 +27,6 @@ export class EventsGateway implements OnGatewayInit{
 
     @SubscribeMessage(SocketEvent.heartBeat)
     heartBeat(client: Socket){
-        console.log('-/-')
         timer(5000).subscribe(() => {
             this.server.to(client.id).emit(SocketEvent.heartBeat, null)
         })
@@ -87,7 +86,6 @@ export class EventsGateway implements OnGatewayInit{
     private reconnectToMatch(client: Socket, payload: Payload){
         const activeMatch: Match = this.matchService.getActiveMatchById(payload.data.id);
         if(!activeMatch){
-            console.log('active match not found')
             // tell the user there is no match to reconnect to
             this.server.to(client.id).emit(SocketEvent.joined, null)
             return;
@@ -178,6 +176,7 @@ export class EventsGateway implements OnGatewayInit{
             this.riotService.getSummoner(payload.data.region, payload.data.summonerName)
                 .subscribe((summonerResponse: SummonerResponse) => {
                     payload.data.summonerId = summonerResponse.id;
+                    payload.data.accountId = summonerResponse.accountId;
                     resolve(payload);
                 }, (error) => this.errorHandler.summonerNotFoundError(client, error));
         });

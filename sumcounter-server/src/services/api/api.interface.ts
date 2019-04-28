@@ -32,7 +32,7 @@ export interface CurrentGameParticipant {
     spell1Id: number;
     spell2Id: number;
     teamId: number;
-    summonerId: number;
+    summonerId: string;
 }
 
 export interface GameCustomizationObject {
@@ -47,6 +47,8 @@ export interface Perks {
 }
 
 export interface SummonerResponse {
+    puuId: string;
+    accountId: string;
     id: number;
     name: string;
     profileIconId: number;

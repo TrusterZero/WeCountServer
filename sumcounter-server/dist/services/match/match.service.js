@@ -22,7 +22,8 @@ let MatchService = class MatchService {
         const matchIndex = this.activeMatches.indexOf(match);
         this.activeMatches.splice(matchIndex, 1);
     }
-    addSummoner(summoner, match) {
+    addSummoner(newSummoner, match) {
+        const summoner = match.summoners.find((summoner) => summoner.id === newSummoner.id);
         summoner.active = true;
         match.activePlayers++;
     }

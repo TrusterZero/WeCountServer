@@ -4,7 +4,7 @@ const spell_data_service_1 = require("../../services/spell-data.service");
 const spellDataService = new spell_data_service_1.SpellDataService();
 class Spell {
     constructor(summonerId, spellId) {
-        this.id = Number(`${summonerId}${spellId}`);
+        this.id = `${summonerId}${spellId}`;
         const spellData = spellDataService.getItemByKey(spellId);
         if (spellData) {
             this.name = spellData.name;

@@ -49,7 +49,7 @@ export interface RequestError {
 
 export interface CreationRequest {
     summonerName?: string;
-    summonerId?: number;
+    summonerId?: string;
     region: string;
 }
 

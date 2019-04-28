@@ -1,6 +1,6 @@
 import { ChampionDataService, ChampionData } from '../../services/champion-data.service';
 
-const championDataService: ChampionDataService = new ChampionDataService()
+//const championDataService: ChampionDataService = new ChampionDataService()
 
 export class Champion {
 
@@ -8,10 +8,10 @@ export class Champion {
     name: string;
     image: string;
 
-    constructor(championId: number) {
+    constructor(championId: number, private championDataService: ChampionDataService) {
         this.id = championId;
 
-        const championData: ChampionData = championDataService.getItemByKey(this.id);
+        const championData: ChampionData = this.championDataService.getItemByKey(this.id);
 
         if (championData) {
             this.name = championData.name;

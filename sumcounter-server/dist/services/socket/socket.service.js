@@ -52,7 +52,6 @@ let EventsGateway = class EventsGateway {
     reconnectToMatch(client, payload) {
         const activeMatch = this.matchService.getActiveMatchById(payload.data.id);
         if (!activeMatch) {
-            console.log('active match not found');
             this.server.to(client.id).emit(socket_interface_1.SocketEvent.joined, null);
             return;
         }
@@ -112,6 +111,7 @@ let EventsGateway = class EventsGateway {
             this.riotService.getSummoner(payload.data.region, payload.data.summonerName)
                 .subscribe((summonerResponse) => {
                 payload.data.summonerId = summonerResponse.id;
+                payload.data.accountId = summonerResponse.accountId;
                 resolve(payload);
             }, (error) => this.errorHandler.summonerNotFoundError(client, error));
         });

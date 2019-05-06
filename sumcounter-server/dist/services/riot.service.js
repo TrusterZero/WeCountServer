@@ -17,23 +17,48 @@ const operators_1 = require("rxjs/operators");
 const summoner_1 = require("../classes/summoner/summoner");
 const riot_request_1 = require("../classes/riot-request/riot-request");
 const credentials_1 = require("../classes/credentials");
+const axios_request_1 = require("../classes/axios-request/axios-request");
+const champion_data_service_1 = require("./champion-data.service");
+const spell_data_service_1 = require("./spell-data.service");
 const COSMIC_INSIGHT_ID = 8347;
 const URL_PARTIAL = {
     SUMMONER: 'summoner/v4/summoners/by-name/',
     MATCH: 'spectator/v4/active-games/by-summoner/',
 };
 let RiotService = class RiotService {
-    constructor(apiService) {
+    constructor(apiService, championDataService, spellDataService) {
         this.apiService = apiService;
+        this.championDataService = championDataService;
+        this.spellDataService = spellDataService;
+        this.getLatestApiVersion().then((latestVersion) => {
+            this.championDataService.setVersion(latestVersion);
+            this.spellDataService.setVersion(latestVersion);
+        });
     }
     getSummoner(region, userName) {
+        console.log(`Asking Riot for summoner: ${userName} from region ${region}`);
         const summonerRequest = new riot_request_1.RiotRequest(region, credentials_1.Credentials.riotKey, {
             url: `${URL_PARTIAL.SUMMONER}${encodeURI(userName)}`,
         });
         return this.apiService.get(summonerRequest)
             .pipe(operators_1.catchError((err) => rxjs_1.throwError(err)), operators_1.map((response) => {
-            console.log(response);
             return response.data;
+        }));
+    }
+    getApiVersions() {
+        const versionRequest = new axios_request_1.AxiosRequest({
+            url: 'https://ddragon.leagueoflegends.com/api/versions.json'
+        });
+        return this.apiService.get(versionRequest);
+    }
+    getLatestApiVersion() {
+        console.log(`Asking Riot for latest Api version`);
+        return new Promise(((resolve, reject) => {
+            this.getApiVersions().subscribe((response) => {
+                const versions = response.data;
+                const latestVersion = versions[0];
+                resolve(latestVersion);
+            });
         }));
     }
     getMatch(creationRequest) {
@@ -44,7 +69,6 @@ let RiotService = class RiotService {
             .pipe(operators_1.catchError((err) => rxjs_1.throwError(err)), operators_1.map((response) => {
             const requesterId = creationRequest.summonerId;
             const { participants, gameId, gameMode } = response.data;
-            console.log(response.data);
             const teamId = participants
                 .find((participant) => participant.summonerId === requesterId).teamId;
             const summoners = this.parseParticipants(requesterId, teamId, participants);
@@ -57,11 +81,11 @@ let RiotService = class RiotService {
             const { summonerId, summonerName, championId, teamId, spell1Id, spell2Id } = participant;
             summoners.push(new summoner_1.Summoner({
                 summonerId,
-                championId,
+                championData: this.championDataService.getItemByKey(championId),
                 summonerName,
                 teamId,
-                spell1Id,
-                spell2Id,
+                spell1Data: this.spellDataService.getItemByKey(spell1Id),
+                spell2Data: this.spellDataService.getItemByKey(spell2Id),
                 hasCDR: this.hasCDR(participant),
                 isRequester: summonerId === requesterId
             }));
@@ -74,7 +98,7 @@ let RiotService = class RiotService {
 };
 RiotService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [api_service_1.ApiService])
+    __metadata("design:paramtypes", [api_service_1.ApiService, champion_data_service_1.ChampionDataService, spell_data_service_1.SpellDataService])
 ], RiotService);
 exports.RiotService = RiotService;
 //# sourceMappingURL=riot.service.js.map

@@ -60,7 +60,6 @@ export class EventsGateway implements OnGatewayInit{
      */
     @SubscribeMessage(SocketEvent.createMatch)
     private createMatch(client: Socket, payload: Payload) {
-
         if (!payload.data) {
             this.errorHandler.invalidData(client);
             return;
@@ -119,7 +118,6 @@ export class EventsGateway implements OnGatewayInit{
     }
 
     private joinMatch(client: Socket,summoner: Summoner,match: Match) {
-
         this.addSummonerToMatch(summoner,match);
         this.server.to(client.id)
             .emit(SocketEvent.matchCreated, match);
@@ -128,7 +126,6 @@ export class EventsGateway implements OnGatewayInit{
     }
 
     private addSummonerToMatch(summoner, match) {
-
         this.matchService.addSummoner(summoner, match);
         this.server.sockets.connected[summoner.clientId].join(`${match.id}`);
     }
@@ -178,7 +175,7 @@ export class EventsGateway implements OnGatewayInit{
                     payload.data.summonerId = summonerResponse.id;
                     payload.data.accountId = summonerResponse.accountId;
                     resolve(payload);
-                }, (error) => this.errorHandler.summonerNotFoundError(client, error));
+                }, (error) => this.errorHandler.summonerNotFoundError(client, error, payload));
         });
     }
 

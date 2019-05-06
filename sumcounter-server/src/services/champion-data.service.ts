@@ -9,8 +9,7 @@ export interface ChampionData extends LocalData {
 @Injectable()
 export class ChampionDataService extends LocalDataService<ChampionData> {
 
-    constructor(private riotService: RiotService) {
+    constructor() {
         super('champions.json');
-        this.setVersion(riotService)
     }
 }

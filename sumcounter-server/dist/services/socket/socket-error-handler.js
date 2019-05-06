@@ -36,9 +36,9 @@ class SocketErrorHandler {
                 });
         }
     }
-    summonerNotFoundError(client, error) {
+    summonerNotFoundError(client, error, payload) {
+        console.error(`can't find summoner ${payload.data.summonerName}, from region ${payload.data.region}`);
         if (!error.response) {
-            console.log(error);
             this.handle(client, error);
         }
         error.response.status === socket_interface_1.ErrorCode.notFound ?
@@ -52,8 +52,8 @@ class SocketErrorHandler {
         this.notify(client, { status: socket_interface_1.ErrorCode.noSummoners, message: socket_interface_1.RequestErrorMessage.noSummoners });
     }
     matchNotFoundError(client, error) {
-        if (!error.response) {
-            console.log(error);
+        if (!error.response || !error.response.status) {
+            console.error(`A match is not found at Riot's server`);
             this.handle(client, error);
         }
         error.response.status === socket_interface_1.ErrorCode.notFound ?

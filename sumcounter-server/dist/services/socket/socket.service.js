@@ -113,7 +113,7 @@ let EventsGateway = class EventsGateway {
                 payload.data.summonerId = summonerResponse.id;
                 payload.data.accountId = summonerResponse.accountId;
                 resolve(payload);
-            }, (error) => this.errorHandler.summonerNotFoundError(client, error));
+            }, (error) => this.errorHandler.summonerNotFoundError(client, error, payload));
         });
     }
     afterInit(server) {

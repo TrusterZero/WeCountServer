@@ -20,8 +20,7 @@ export interface SpellData extends LocalData {
 
 @Injectable()
 export class SpellDataService extends LocalDataService<SpellData> {
-     constructor(private riotService: RiotService) {
+     constructor() {
          super('spells.json');
-         this.setVersion(riotService);
     }
 }

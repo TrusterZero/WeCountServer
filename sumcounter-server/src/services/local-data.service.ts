@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 import {RiotService} from "./riot.service";
+import {Injectable} from "@nestjs/common";
+
 
 export interface LocalData {
     key: number;
@@ -7,6 +9,7 @@ export interface LocalData {
     name: string;
 }
 
+@Injectable()
 export abstract class LocalDataService<T extends LocalData>  {
     private assetPath = 'assets/';
     private localData: T[] = [];
@@ -15,14 +18,12 @@ export abstract class LocalDataService<T extends LocalData>  {
 
     protected constructor(fileName: string) {
         this.localData = this.getLocalData(fileName);
-
     }
 
 
-    public setVersion(riotService:RiotService) {
-        riotService.getLatestApiVersion().then((latestApiVersion: string)=> {
-            this.apiVersion = latestApiVersion;
-        });
+    public setVersion(latestApiVersion: string) {
+        console.log(`Setting latest Api version to ${latestApiVersion}`)
+        this.apiVersion = latestApiVersion;
     }
 
     /**
@@ -48,7 +49,6 @@ export abstract class LocalDataService<T extends LocalData>  {
         try {
             parsedContent = JSON.parse(fileData.toString());
         } catch (err) {
-            console.log(err)
             console.warn('couldn\'t parse contents of', fileName);
         }
 

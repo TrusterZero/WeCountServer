@@ -7,7 +7,7 @@
  */
 import {Server, Socket} from 'socket.io';
 import {AxiosError} from '@nestjs/common/http/interfaces/axios.interfaces';
-import {ErrorCode, RequestError, RequestErrorMessage, SocketEvent} from './socket.interface';
+import {ErrorCode, Payload, RequestError, RequestErrorMessage, SocketEvent} from './socket.interface';
 
 export class SocketErrorHandler {
 
@@ -58,9 +58,9 @@ export class SocketErrorHandler {
         }
     }
 
-    summonerNotFoundError(client: Socket, error: AxiosError) {
+    summonerNotFoundError(client: Socket, error: AxiosError, payload: Payload) {
+        console.error(`can't find summoner ${payload.data.summonerName}, from region ${payload.data.region}`);
         if (!error.response) {
-            console.log(error)
             this.handle(client, error);
         }
         error.response.status === ErrorCode.notFound ?
@@ -76,8 +76,8 @@ export class SocketErrorHandler {
     }
 
     matchNotFoundError(client: Socket, error: AxiosError) {
-        if (!error.response) {
-            console.log(error)
+        if (!error.response || !error.response.status) {
+            console.error(`A match is not found at Riot's server`);
             this.handle(client, error);
         }
         error.response.status === ErrorCode.notFound ?

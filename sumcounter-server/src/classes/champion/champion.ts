@@ -1,6 +1,6 @@
 import { ChampionDataService, ChampionData } from '../../services/champion-data.service';
-
-//const championDataService: ChampionDataService = new ChampionDataService()
+import {RiotService} from "../../services/riot.service";
+import {Inject} from "@nestjs/common";
 
 export class Champion {
 
@@ -8,14 +8,9 @@ export class Champion {
     name: string;
     image: string;
 
-    constructor(championId: number, private championDataService: ChampionDataService) {
-        this.id = championId;
-
-        const championData: ChampionData = this.championDataService.getItemByKey(this.id);
-
-        if (championData) {
-            this.name = championData.name;
-            this.image = championData.image;
-        }
+    constructor(championData: ChampionData) {
+        this.id = championData.key;
+        this.name = championData.name;
+        this.image = championData.image;
     }
 }

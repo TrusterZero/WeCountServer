@@ -12,7 +12,6 @@ export const PROVIDERS = [
     ApiService,
     RiotService,
     MatchService,
-    SpellDataService,
     ChampionDataService,
     SpellDataService,
     EventsGateway,

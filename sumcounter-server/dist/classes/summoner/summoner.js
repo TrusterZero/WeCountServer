@@ -6,13 +6,13 @@ const REDUCED_CDR_AMOUNT = 0.95;
 class Summoner {
     constructor(parameters) {
         this.active = false;
-        const { summonerId, summonerName, championId, teamId, spell1Id, spell2Id, hasCDR, isRequester } = parameters;
+        const { summonerId, summonerName, championData, teamId, spell1Data, spell2Data, hasCDR, isRequester } = parameters;
         this.id = summonerId;
         this.name = summonerName;
-        this.champion = new champion_1.Champion(championId);
+        this.champion = new champion_1.Champion(championData);
         this.teamId = teamId;
-        this.spell1 = new spell_1.Spell(this.id, spell1Id);
-        this.spell2 = new spell_1.Spell(this.id, spell2Id);
+        this.spell1 = new spell_1.Spell(this.id, spell1Data);
+        this.spell2 = new spell_1.Spell(this.id, spell2Data);
         this.hasCDR = hasCDR;
         this.isRequester = isRequester;
         if (this.hasCDR) {

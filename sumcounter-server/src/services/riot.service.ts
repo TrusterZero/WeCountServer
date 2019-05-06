@@ -3,13 +3,15 @@ import {ApiService} from './api/api.service';
 import {Match} from '../classes/match/match';
 import {CurrentGameParticipant, MatchResponse, SummonerResponse} from './api/api.interface';
 import {Observable, throwError} from 'rxjs';
-import {catchError, map, subscribeOn} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {AxiosResponse} from '@nestjs/common/http/interfaces/axios.interfaces';
 import {Summoner} from '../classes/summoner/summoner';
 import {RiotRequest} from '../classes/riot-request/riot-request';
 import {CreationRequest} from './socket/socket.interface';
 import {Credentials} from '../classes/credentials';
 import {AxiosRequest} from "../classes/axios-request/axios-request";
+import {ChampionDataService} from "./champion-data.service";
+import {SpellDataService} from "./spell-data.service";
 
 
 const COSMIC_INSIGHT_ID = 8347;
@@ -21,7 +23,12 @@ const URL_PARTIAL = {
 @Injectable()
 export class RiotService {
 
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService, private championDataService: ChampionDataService, private spellDataService: SpellDataService) {
+        this.getLatestApiVersion().then((latestVersion: string) => {
+            this.championDataService.setVersion(latestVersion);
+            this.spellDataService.setVersion(latestVersion)
+        });
+    }
 
     /**
      *
@@ -30,10 +37,10 @@ export class RiotService {
      * @param userName
      */
     getSummoner(region, userName: string): Observable<SummonerResponse> {
+        console.log(`Asking Riot for summoner: ${userName} from region ${region}`);
         const summonerRequest: RiotRequest = new RiotRequest(region, Credentials.riotKey, {
             url: `${URL_PARTIAL.SUMMONER}${encodeURI(userName)}`,
         });
-
 
         return this.apiService.get<SummonerResponse>(summonerRequest)
             .pipe(catchError((err: any) => throwError(err)),
@@ -53,6 +60,7 @@ export class RiotService {
     }
 
     public getLatestApiVersion(): Promise<string> {
+        console.log(`Asking Riot for latest Api version`);
         return new Promise(((resolve, reject) =>  {
             this.getApiVersions().subscribe((response :AxiosResponse) => {
                 const versions: string[] = response.data;
@@ -78,7 +86,6 @@ export class RiotService {
                 map((response: AxiosResponse<MatchResponse>) => {
                     const requesterId = creationRequest.summonerId;
                     const {participants, gameId, gameMode} = response.data;
-                    console.log(response.data);
                         const teamId = participants // TODO: check waarom 2 number parses wel werken
                             .find((participant: CurrentGameParticipant) => participant.summonerId === requesterId).teamId;
 
@@ -101,14 +108,15 @@ export class RiotService {
         const summoners: Summoner[] = [];
         participants.forEach((participant: CurrentGameParticipant) => {
                 const {summonerId, summonerName, championId, teamId, spell1Id, spell2Id} = participant;
+
                 summoners.push(
                     new Summoner({
                             summonerId,
-                            championId,
+                            championData: this.championDataService.getItemByKey(championId),
                             summonerName,
                             teamId,
-                            spell1Id,
-                            spell2Id,
+                            spell1Data: this.spellDataService.getItemByKey(spell1Id),
+                            spell2Data: this.spellDataService.getItemByKey(spell2Id),
                             hasCDR: this.hasCDR(participant),
                             isRequester: summonerId === requesterId
                         },

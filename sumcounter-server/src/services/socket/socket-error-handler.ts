@@ -19,7 +19,8 @@ export class SocketErrorHandler {
 
     handle(client: Socket, error: AxiosError) {
 
-        if (!error.response) {
+        if (!this.errorIsOkey(error)) {
+            console.error(error);
             this.notify(client, {status: ErrorCode.unhandled, message: RequestErrorMessage.generic});
             return false;
         }
@@ -60,7 +61,7 @@ export class SocketErrorHandler {
 
     summonerNotFoundError(client: Socket, error: AxiosError, payload: Payload) {
         console.error(`can't find summoner ${payload.data.summonerName}, from region ${payload.data.region}`);
-        if (!error.response) {
+        if (!this.errorIsOkey(error)) {
             this.handle(client, error);
         }
         error.response.status === ErrorCode.notFound ?
@@ -76,7 +77,7 @@ export class SocketErrorHandler {
     }
 
     matchNotFoundError(client: Socket, error: AxiosError) {
-        if (!error.response || !error.response.status) {
+        if (this.errorIsOkey(error)) {
             console.error(`A match is not found at Riot's server`);
             this.handle(client, error);
         }
@@ -101,5 +102,15 @@ export class SocketErrorHandler {
 
     private notify(client: Socket, message: RequestError){
         this.server.to(client.id).emit(SocketEvent.requestError, message);
+    }
+
+    private errorIsOkey(error: AxiosError) {
+        if(!error.response) {
+            return false;
+        }
+        if(!error.response.status) {
+            return false;
+        }
+        return true;
     }
 }

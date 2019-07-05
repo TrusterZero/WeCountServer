@@ -8,37 +8,17 @@
     <list default="true" id="70661529-4172-4a26-b540-e26ae0f1ea69" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/assets/champions.json" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/assets/champions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/app-module/app.module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/app-module/app.module.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/app-module/providers.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/app-module/providers.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/classes/champion/champion.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/classes/champion/champion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/classes/champion/champion.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/classes/champion/champion.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/classes/spell/spell.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/classes/spell/spell.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/classes/spell/spell.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/classes/spell/spell.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/classes/summoner/summoner.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/classes/summoner/summoner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/classes/summoner/summoner.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/classes/summoner/summoner.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/champion-data.service.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/champion-data.service.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/assets/champions.json" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/assets/champions.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/local-data.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/local-data.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/local-data.service.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/local-data.service.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/match/match.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/match/match.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/match/match.service.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/match/match.service.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket-error-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket-error-handler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket-error-handler.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket-error-handler.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket.service.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket.service.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/dist/services/spell-data.service.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/dist/services/spell-data.service.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/src/app-module/providers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/app-module/providers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/src/classes/champion/champion.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/classes/champion/champion.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/src/classes/spell/spell.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/classes/spell/spell.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/src/classes/summoner/summoner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/classes/summoner/summoner.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/src/services/champion-data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/services/champion-data.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/src/services/local-data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/services/local-data.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/src/services/match/match.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/services/match/match.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/src/services/riot.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/services/riot.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket-error-handler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket-error-handler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sumcounter-server/src/services/spell-data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sumcounter-server/src/services/spell-data.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -56,8 +36,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/socket/socket.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1883">
-                  <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
+                <state relative-caret-position="242">
+                  <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
                   <folding>
                     <element signature="e#0#102#0" expanded="true" />
                   </folding>
@@ -68,26 +48,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/socket/socket-error-handler.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1343">
-                  <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket-error-handler.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="646">
-                  <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="884">
-                  <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+                <state relative-caret-position="279">
+                  <caret line="79" column="12" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
@@ -96,7 +58,7 @@
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/spell/spell.ts">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="323">
-                  <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+                  <caret line="19" selection-start-line="19" selection-end-line="19" />
                 </state>
               </provider>
             </entry>
@@ -104,8 +66,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/riot.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="25" column="106" selection-start-line="25" selection-start-column="106" selection-end-line="25" selection-end-column="106" />
+                <state relative-caret-position="119">
+                  <caret line="44" column="13" lean-forward="true" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
                   <folding>
                     <element signature="e#0#55#0" expanded="true" />
                   </folding>
@@ -114,9 +76,18 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/riot-request/riot-request.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="72">
+                  <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/match/match.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
+                <state relative-caret-position="544">
                   <caret line="34" column="18" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
                 </state>
               </provider>
@@ -167,26 +138,26 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/champion-data.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/summoner/summoner.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+                <state relative-caret-position="119">
+                  <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/summoner/summoner.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                  <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/local-data.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="544">
-                  <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+                <state relative-caret-position="-340">
+                  <caret line="23" column="73" selection-start-line="23" selection-start-column="73" selection-end-line="23" selection-end-column="73" />
                   <folding>
                     <element signature="e#0#25#0" expanded="true" />
                   </folding>
@@ -197,8 +168,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sumcounter-server/assets/champions.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="12087">
-                  <caret line="711" column="3" selection-start-line="711" selection-start-column="3" selection-end-line="711" selection-end-column="3" />
+                <state relative-caret-position="347">
+                  <caret line="718" column="20" selection-start-line="718" selection-start-column="20" selection-end-line="718" selection-end-column="20" />
                 </state>
               </provider>
             </entry>
@@ -216,7 +187,7 @@
             <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/spell-data.service.ts">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="255">
-                  <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+                  <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
                 </state>
               </provider>
             </entry>
@@ -246,8 +217,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>heartbea</find>
-      <find>rejoin</find>
       <find>conso</find>
       <find>match</find>
       <find>log</find>
@@ -271,7 +240,17 @@
       <find>Pyk</find>
       <find>searching</find>
       <find>searching for match</find>
+      <find>neek</find>
+      <find>neeko</find>
+      <find>yuu</find>
+      <find>error.response.status === ErrorCode.notFound</find>
+      <find>350</find>
+      <find>!error.response || !error.response.status</find>
+      <find>be1</find>
     </findStrings>
+    <replaceStrings>
+      <replace>errorIsOkey(error)</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -310,19 +289,20 @@
         <option value="$PROJECT_DIR$/sumcounter-server/src/services/spell-data.service.ts" />
         <option value="$PROJECT_DIR$/sumcounter-server/src/services/champion-data.service.ts" />
         <option value="$PROJECT_DIR$/sumcounter-server/src/services/match/match.service.ts" />
-        <option value="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket.service.ts" />
-        <option value="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket-error-handler.ts" />
-        <option value="$PROJECT_DIR$/sumcounter-server/src/services/local-data.service.ts" />
-        <option value="$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js" />
         <option value="$PROJECT_DIR$/sumcounter-server/dist/services/local-data.service.js" />
         <option value="$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket-error-handler.js" />
-        <option value="$PROJECT_DIR$/sumcounter-server/assets/champions.json" />
-        <option value="$PROJECT_DIR$/sumcounter-server/src/services/riot.service.ts" />
         <option value="$PROJECT_DIR$/sumcounter-server/src/classes/spell/spell.ts" />
+        <option value="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket-error-handler.ts" />
+        <option value="$PROJECT_DIR$/sumcounter-server/dist/assets/champions.json" />
+        <option value="$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js" />
+        <option value="$PROJECT_DIR$/sumcounter-server/assets/champions.json" />
+        <option value="$PROJECT_DIR$/sumcounter-server/src/services/local-data.service.ts" />
+        <option value="$PROJECT_DIR$/sumcounter-server/src/services/riot.service.ts" />
+        <option value="$PROJECT_DIR$/sumcounter-server/src/services/socket/socket.service.ts" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -401,7 +381,7 @@
               <item name="sumcounter-server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="match" type="462c0819:PsiDirectoryNode" />
+              <item name="socket" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -501,14 +481,17 @@
       <workItem from="1556474809847" duration="1170000" />
       <workItem from="1556563652256" duration="19262000" />
       <workItem from="1557161280435" duration="709000" />
+      <workItem from="1557256474711" duration="2117000" />
+      <workItem from="1557473797531" duration="71000" />
+      <workItem from="1558191614516" duration="8687000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="280146000" />
+    <option name="totallyTimeSpent" value="291021000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -561,20 +544,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/node_modules/axios/lib/core/createError.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/node_modules/@nestjs/common/http/interfaces/axios.interfaces.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sumcounter-server/node_modules/@nestjs/common/http/http.service.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -659,13 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/riot-request/riot-request.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sumcounter-server/dist/classes/summoner/summoner.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -734,41 +696,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/socket/socket-error-handler.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sumcounter-server/dist/services/socket/socket-error-handler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
-          <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/spell/spell.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/riot.service.ts">
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/match/match.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="25" column="106" selection-start-line="25" selection-start-column="106" selection-end-line="25" selection-end-column="106" />
-          <folding>
-            <element signature="e#0#55#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="544">
+          <caret line="34" column="18" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -782,40 +727,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/champion/champion.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/champion-data.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/local-data.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/assets/champions.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12087">
-          <caret line="711" column="3" selection-start-line="711" selection-start-column="3" selection-end-line="711" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sumcounter-server/assets/champions-OLD.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11492">
@@ -826,7 +737,7 @@
     <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/spell-data.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -842,22 +753,94 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/summoner/summoner.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+        <state relative-caret-position="306">
+          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/match/match.service.ts">
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/dist/services/riot.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="34" column="18" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
+        <state relative-caret-position="95">
+          <caret line="80" column="101" selection-start-line="80" selection-start-column="101" selection-end-line="80" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/champion-data.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/dist/assets/champions.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="719" column="19" selection-start-line="719" selection-start-column="19" selection-end-line="719" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/socket/socket-error-handler.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="79" column="12" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/champion/champion.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/assets/champions.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="718" column="20" selection-start-line="718" selection-start-column="20" selection-end-line="718" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/local-data.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="23" column="73" selection-start-line="23" selection-start-column="73" selection-end-line="23" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/classes/riot-request/riot-request.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/node_modules/rxjs/src/internal/observable/throwError.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="52" column="86" lean-forward="true" selection-start-line="52" selection-start-column="86" selection-end-line="52" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/riot.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="44" column="13" lean-forward="true" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sumcounter-server/src/services/socket/socket.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1883">
-          <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
+        <state relative-caret-position="242">
+          <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
           <folding>
             <element signature="e#0#102#0" expanded="true" />
           </folding>

@@ -175,7 +175,7 @@ export class EventsGateway implements OnGatewayInit{
                     payload.data.summonerId = summonerResponse.id;
                     payload.data.accountId = summonerResponse.accountId;
                     resolve(payload);
-                }, (error) => this.errorHandler.summonerNotFoundError(client, error, payload));
+                }, (error) => {console.log(error); this.errorHandler.summonerNotFoundError(client, error, payload)});
         });
     }
 

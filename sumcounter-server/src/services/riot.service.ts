@@ -10,15 +10,21 @@ import {RiotRequest} from '../classes/riot-request/riot-request';
 import {CreationRequest} from './socket/socket.interface';
 import {Credentials} from '../classes/credentials';
 import {AxiosRequest} from "../classes/axios-request/axios-request";
-import {ChampionDataService} from "./champion-data.service";
-import {SpellDataService} from "./spell-data.service";
-
+import {ChampionData, ChampionDataService} from "./champion-data.service";
+import {SpellData, SpellDataService} from "./spell-data.service";
 
 const COSMIC_INSIGHT_ID = 8347;
 const URL_PARTIAL = {
     SUMMONER: 'summoner/v4/summoners/by-name/',
     MATCH: 'spectator/v4/active-games/by-summoner/',
 };
+
+
+interface LocalDataSet {
+    championData: ChampionData;
+    spell1Data: SpellData;
+    spell2Data: SpellData;
+}
 
 @Injectable()
 export class RiotService {
@@ -45,6 +51,7 @@ export class RiotService {
         return this.apiService.get<SummonerResponse>(summonerRequest)
             .pipe(catchError((err: any) => throwError(err)),
                 map((response: AxiosResponse<SummonerResponse>) => {
+
                     return response.data;
                 }),
             );
@@ -107,16 +114,17 @@ export class RiotService {
 
         const summoners: Summoner[] = [];
         participants.forEach((participant: CurrentGameParticipant) => {
-                const {summonerId, summonerName, championId, teamId, spell1Id, spell2Id} = participant;
+                const {summonerId, summonerName, teamId} = participant;
+                const {championData, spell1Data, spell2Data} = this.getLocalData(participant) as LocalDataSet;
 
                 summoners.push(
                     new Summoner({
                             summonerId,
-                            championData: this.championDataService.getItemByKey(championId),
+                            championData,
                             summonerName,
                             teamId,
-                            spell1Data: this.spellDataService.getItemByKey(spell1Id),
-                            spell2Data: this.spellDataService.getItemByKey(spell2Id),
+                            spell1Data,
+                            spell2Data,
                             hasCDR: this.hasCDR(participant),
                             isRequester: summonerId === requesterId
                         },
@@ -136,5 +144,21 @@ export class RiotService {
         return user.perks.perkIds.includes(COSMIC_INSIGHT_ID);
     }
 
+    private getLocalData(participant: CurrentGameParticipant) {
+        const {championId, spell1Id, spell2Id} = participant;
+
+        const championData = this.championDataService.getItemByKey(championId);
+        const spell1Data = this.spellDataService.getItemByKey(spell1Id);
+        const spell2Data = this.spellDataService.getItemByKey(spell2Id);
+
+        if(!championData || !spell1Data || !spell2Data) {
+            return null;
+        } else {
+            return {championData, spell1Data, spell2Data} as LocalDataSet
+        }
+
+    }
+
 }
+
 

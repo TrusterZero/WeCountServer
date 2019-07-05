@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import {RiotService} from "./riot.service";
 import {Injectable} from "@nestjs/common";
 
 
@@ -22,7 +21,7 @@ export abstract class LocalDataService<T extends LocalData>  {
 
 
     public setVersion(latestApiVersion: string) {
-        console.log(`Setting latest Api version to ${latestApiVersion}`)
+        console.log(`Setting latest Api version to ${latestApiVersion}`);
         this.apiVersion = latestApiVersion;
     }
 
@@ -33,7 +32,14 @@ export abstract class LocalDataService<T extends LocalData>  {
      */
     getItemByKey(key: number): T {
         const data: T = this.localData.find((item: T) => item.key.toString() === key.toString());
-        data.version = this.apiVersion;
+        if(data) {
+            data.version = this.apiVersion;
+        }
+        if(!data){
+            console.error(`Champion with key: ${key} not found`);
+            return null;
+        }
+
         return data;
     }
 

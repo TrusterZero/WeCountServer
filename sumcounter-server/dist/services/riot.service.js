@@ -78,14 +78,15 @@ let RiotService = class RiotService {
     parseParticipants(requesterId, teamId, participants) {
         const summoners = [];
         participants.forEach((participant) => {
-            const { summonerId, summonerName, championId, teamId, spell1Id, spell2Id } = participant;
+            const { summonerId, summonerName, teamId } = participant;
+            const { championData, spell1Data, spell2Data } = this.getLocalData(participant);
             summoners.push(new summoner_1.Summoner({
                 summonerId,
-                championData: this.championDataService.getItemByKey(championId),
+                championData,
                 summonerName,
                 teamId,
-                spell1Data: this.spellDataService.getItemByKey(spell1Id),
-                spell2Data: this.spellDataService.getItemByKey(spell2Id),
+                spell1Data,
+                spell2Data,
                 hasCDR: this.hasCDR(participant),
                 isRequester: summonerId === requesterId
             }));
@@ -94,6 +95,18 @@ let RiotService = class RiotService {
     }
     hasCDR(user) {
         return user.perks.perkIds.includes(COSMIC_INSIGHT_ID);
+    }
+    getLocalData(participant) {
+        const { championId, spell1Id, spell2Id } = participant;
+        const championData = this.championDataService.getItemByKey(championId);
+        const spell1Data = this.spellDataService.getItemByKey(spell1Id);
+        const spell2Data = this.spellDataService.getItemByKey(spell2Id);
+        if (!championData || !spell1Data || !spell2Data) {
+            return null;
+        }
+        else {
+            return { championData, spell1Data, spell2Data };
+        }
     }
 };
 RiotService = __decorate([

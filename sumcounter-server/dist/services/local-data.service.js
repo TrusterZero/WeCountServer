@@ -23,7 +23,13 @@ let LocalDataService = class LocalDataService {
     }
     getItemByKey(key) {
         const data = this.localData.find((item) => item.key.toString() === key.toString());
-        data.version = this.apiVersion;
+        if (data) {
+            data.version = this.apiVersion;
+        }
+        if (!data) {
+            console.error(`Champion with key: ${key} not found`);
+            return null;
+        }
         return data;
     }
     getLocalData(fileName) {

@@ -6,7 +6,8 @@ class SocketErrorHandler {
         this.server = server;
     }
     handle(client, error) {
-        if (!error.response) {
+        if (!this.errorIsOkey(error)) {
+            console.error(error);
             this.notify(client, { status: socket_interface_1.ErrorCode.unhandled, message: socket_interface_1.RequestErrorMessage.generic });
             return false;
         }
@@ -38,7 +39,7 @@ class SocketErrorHandler {
     }
     summonerNotFoundError(client, error, payload) {
         console.error(`can't find summoner ${payload.data.summonerName}, from region ${payload.data.region}`);
-        if (!error.response) {
+        if (!this.errorIsOkey(error)) {
             this.handle(client, error);
         }
         error.response.status === socket_interface_1.ErrorCode.notFound ?
@@ -52,7 +53,7 @@ class SocketErrorHandler {
         this.notify(client, { status: socket_interface_1.ErrorCode.noSummoners, message: socket_interface_1.RequestErrorMessage.noSummoners });
     }
     matchNotFoundError(client, error) {
-        if (!error.response || !error.response.status) {
+        if (this.errorIsOkey(error)) {
             console.error(`A match is not found at Riot's server`);
             this.handle(client, error);
         }
@@ -74,6 +75,15 @@ class SocketErrorHandler {
     }
     notify(client, message) {
         this.server.to(client.id).emit(socket_interface_1.SocketEvent.requestError, message);
+    }
+    errorIsOkey(error) {
+        if (!error.response) {
+            return false;
+        }
+        if (!error.response.status) {
+            return false;
+        }
+        return true;
     }
 }
 exports.SocketErrorHandler = SocketErrorHandler;

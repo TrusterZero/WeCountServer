@@ -18,7 +18,6 @@ let LocalDataService = class LocalDataService {
         this.localData = this.getLocalData(fileName);
     }
     setVersion(latestApiVersion) {
-        console.log(`Setting latest Api version to ${latestApiVersion}`);
         this.apiVersion = latestApiVersion;
     }
     getItemByKey(key) {

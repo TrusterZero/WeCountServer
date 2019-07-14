@@ -86,7 +86,7 @@ export class EventsGateway implements OnGatewayInit{
         const activeMatch: Match = this.matchService.getActiveMatchById(payload.data.id);
         if(!activeMatch){
             // tell the user there is no match to reconnect to
-            this.server.to(client.id).emit(SocketEvent.joined, null)
+            this.server.to(client.id).emit(SocketEvent.joined, null);
             return;
         }
         const summoner = activeMatch.summoners.find((summoner:Summoner) =>
@@ -132,7 +132,7 @@ export class EventsGateway implements OnGatewayInit{
 
     @SubscribeMessage(SocketEvent.getHistory)
     private spellHistory(client: Socket, payload: Payload) {
-        const match = this.matchService.getActiveMatchById(payload.roomId)
+        const match = this.matchService.getActiveMatchById(payload.roomId);
         client.emit(SocketEvent.spellHistory, match.spellHistory);
     }
 
@@ -155,7 +155,7 @@ export class EventsGateway implements OnGatewayInit{
 
     @SubscribeMessage(SocketEvent.getActiveSummoners)
     private getActiveSummoners(client, payload) {
-        const match = this.matchService.getActiveMatchById(payload.roomId)
+        const match = this.matchService.getActiveMatchById(payload.roomId);
         this.server.to(client.id)
             .emit(SocketEvent.activeSummoners, {summoners :match.summoners.filter((summoner) => summoner.active)});
     }

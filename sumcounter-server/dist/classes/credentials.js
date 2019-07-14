@@ -4,4 +4,4 @@ class Credentials {
 }
 Credentials.riotKey = 'RGAPI-a1ee52e3-e3ba-4694-9b88-2ba52efa7ab9';
 exports.Credentials = Credentials;
-//# sourceMappingURL=credentials.js.map
+//# sourceMappingURL=configValues.js.map

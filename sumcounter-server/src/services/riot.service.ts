@@ -8,7 +8,7 @@ import {AxiosResponse} from '@nestjs/common/http/interfaces/axios.interfaces';
 import {Summoner} from '../classes/summoner/summoner';
 import {RiotRequest} from '../classes/riot-request/riot-request';
 import {CreationRequest} from './socket/socket.interface';
-import {Credentials} from '../classes/credentials';
+import {credentials} from '../classes/configValues';
 import {AxiosRequest} from "../classes/axios-request/axios-request";
 import {ChampionData, ChampionDataService} from "./champion-data.service";
 import {SpellData, SpellDataService} from "./spell-data.service";
@@ -30,10 +30,7 @@ interface LocalDataSet {
 export class RiotService {
 
     constructor(private apiService: ApiService, private championDataService: ChampionDataService, private spellDataService: SpellDataService) {
-        this.getLatestApiVersion().then((latestVersion: string) => {
-            this.championDataService.setVersion(latestVersion);
-            this.spellDataService.setVersion(latestVersion)
-        });
+
     }
 
     /**
@@ -44,7 +41,7 @@ export class RiotService {
      */
     getSummoner(region, userName: string): Observable<SummonerResponse> {
         console.log(`Asking Riot for summoner: ${userName} from region ${region}`);
-        const summonerRequest: RiotRequest = new RiotRequest(region, Credentials.riotKey, {
+        const summonerRequest: RiotRequest = new RiotRequest(region, credentials.riotKey, {
             url: `${URL_PARTIAL.SUMMONER}${encodeURI(userName)}`,
         });
 
@@ -84,7 +81,7 @@ export class RiotService {
      * @param creationRequest
      */
     getMatch(creationRequest: CreationRequest): Observable<Match> {
-        const matchRequest: RiotRequest = new RiotRequest(creationRequest.region, Credentials.riotKey, {
+        const matchRequest: RiotRequest = new RiotRequest(creationRequest.region, credentials.riotKey, {
             url: `${URL_PARTIAL.MATCH}${creationRequest.summonerId}`,
         });
 

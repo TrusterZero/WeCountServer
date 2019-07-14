@@ -1,40 +1,28 @@
 import * as fs from 'fs';
 import {Injectable} from "@nestjs/common";
-import {credentials} from '../classes/configValues'
-import {assetPath, Config, config} from "./config-service";
-import {skip} from "rxjs/operators";
+import {credentials} from 'classes/configValues';
 
 
-export interface LocalData {
-    key: number;
-    version: string;
+export interface configData {
     name: string;
+    value: any;
 }
 
 @Injectable()
-export abstract class LocalDataService<T extends LocalData> {
-    private assetPath = assetPath;
+export abstract class  ConfigDataService<T extends configData>  {
+    private assetPath = credentials.assetPath;
     private localData: T[] = [];
     private apiVersion: string;
-    public ddragonUrl: string;
+
 
     protected constructor(fileName: string) {
-        this.refreshFile(fileName);
-        const ignoreConfigInitiation = config.pipe(skip(1));
-        ignoreConfigInitiation.subscribe((config: Config) => {
-            if(config){
-                this.setVersion(config.apiVersion)
-            }
-        });
-    }
-
-    public refreshFile(fileName) {
         this.localData = this.getLocalData(fileName);
     }
 
+
     public setVersion(latestApiVersion: string) {
+        console.log(`Setting latest Api version to ${latestApiVersion}`);
         this.apiVersion = latestApiVersion;
-        this.ddragonUrl = `http://ddragon.leagueoflegends.com/cdn/${this.apiVersion}/data/en_US/`;
     }
 
     /**
@@ -44,10 +32,10 @@ export abstract class LocalDataService<T extends LocalData> {
      */
     getItemByKey(key: number): T {
         const data: T = this.localData.find((item: T) => item.key.toString() === key.toString());
-        if (data) {
+        if(data) {
             data.version = this.apiVersion;
         }
-        if (!data) {
+        if(!data){
             console.error(`Champion with key: ${key} not found`);
             return null;
         }

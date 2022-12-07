@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^5.0.0",
-    "@nestjs/core": "^5.0.0",
+    "@nestjs/core": "^9.2.1",
     "@nestjs/websockets": "^5.1.0",
     "@types/socket.io": "^1.4.36",
     "@types/websocket": "0.0.39",
